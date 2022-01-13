@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import CardList from '../components/CardList';
-import SearchBox from '../components/SearchBox';
-import Scroll from '../components/Scroll';
+import CardList from '../components/CardList.tsx';
+import SearchBox from '../components/SearchBox.tsx';
+import Scroll from '../components/Scroll.tsx';
 import ErrorBoundary from '../components/ErrorBoundary';
 import './App.css';
 
 import { setSearchField, requestRobots } from '../actions';
-import Header from '../components/Header';
+import Header from '../components/Header.tsx';
+import { RobotProps } from '../types/RobotTypes';
 
 const mapStateToProps = (state) => ({
   searchField: state.searchRobots.searchField,
@@ -32,8 +33,8 @@ const App = ({
     onRequestRobots();
   }, []);
 
-  const filteredRobots = robots.filter(({ name }) =>
-    name.toLowerCase().includes(searchField)
+  const filteredRobots: Array<RobotProps> = robots.filter(
+    ({ name }: { name: string }) => name.toLowerCase().includes(searchField)
   );
 
   return isPending ? (
